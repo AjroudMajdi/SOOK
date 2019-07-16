@@ -129,12 +129,12 @@ export default class Login extends Component {
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
-            width: 170,
-            height: 170,
-            marginLeft: 60,
-            padding: 80
+            width: 30,
+            height: 30,
+            marginLeft: 75,
+            padding: 70
           }}
-          source={require("../images/logo.jpg")}
+          source={require("../images/logo1.png")}
         />
 
         <Form>
