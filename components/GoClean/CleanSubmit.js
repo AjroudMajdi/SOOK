@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 
-import UIStepper from "react-native-ui-stepper";
-import DateTimePicker from "react-native-modal-datetime-picker";
-import { CheckBox } from "react-native-elements";
+import firebase from "../../config/Firebase";
+
 import {
   Container,
   Header,
@@ -30,9 +28,18 @@ export default class CleanSubmit extends Component {
     super(props);
     this.state = {};
   }
+
   render() {
     const { state } = this.props.navigation;
-
+    let Name = state.params.y.name;
+    let PhoneNombre = state.params.y.phone;
+    let Email = state.params.y.email;
+    let Adresse = state.params.y.adresse;
+    let Type = state.params.x.type;
+    let Rooms = state.params.x.nbr;
+    let Bathrooms = state.params.x.nbr1;
+    let Date = state.params.x.date1;
+    let Price = state.params.x.price;
     return (
       <ScrollView style={styles.container} scrollEventThrottle={16}>
         <View
@@ -160,40 +167,6 @@ export default class CleanSubmit extends Component {
               {state.params.x.nbr1}
             </Text>
           </View>
-          <View style={{ flexDirection: "row", paddingTop: 10 }}>
-            <Text
-              style={{ fontSize: 18, color: "black", alignSelf: "stretch" }}
-            >
-              Kitchen
-            </Text>
-            <Text
-              style={{
-                fontSize: 15,
-                marginLeft: 215,
-
-                alignSelf: "stretch"
-              }}
-            >
-              {state.params.x.Kitchen.toString()}
-            </Text>
-          </View>
-          <View style={{ flexDirection: "row", paddingTop: 10 }}>
-            <Text
-              style={{ fontSize: 18, color: "black", alignSelf: "stretch" }}
-            >
-              Garage
-            </Text>
-            <Text
-              style={{
-                fontSize: 15,
-                marginLeft: 220,
-
-                alignSelf: "stretch"
-              }}
-            >
-              {state.params.x.Garage.toString()}
-            </Text>
-          </View>
         </View>
         <Card
           style={{
@@ -227,7 +200,7 @@ export default class CleanSubmit extends Component {
                 alignSelf: "stretch"
               }}
             >
-              100 dt
+              {state.params.x.price}
             </Text>
           </View>
           <View style={{ flexDirection: "row", paddingTop: 10 }}>
@@ -264,6 +237,20 @@ export default class CleanSubmit extends Component {
               <Button
                 style={styles.buttonContainer1}
                 onPress={() => {
+                  firebase
+                    .database()
+                    .ref("Commande/")
+                    .push({
+                      Name,
+                      PhoneNombre,
+                      Email,
+                      Adresse,
+                      Type,
+                      Rooms,
+                      Bathrooms,
+                      Date,
+                      Price
+                    });
                   this.props.navigation.navigate("ListUserProvieder");
                 }}
               >

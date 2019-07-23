@@ -53,7 +53,16 @@ export default class Login extends Component {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-
+      .then(
+        firebase
+          .database()
+          .ref("UsersList/")
+          .set({
+            email,
+            password,
+            displayName
+          })
+      )
       .catch(error => {
         switch (error.code) {
           case "auth/email-already-in-use":

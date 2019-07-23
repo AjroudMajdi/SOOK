@@ -9,7 +9,7 @@ import com.facebook.react.ReactApplication;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.evollu.react.fa.FIRAnalyticsPackage;
 
-
+import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -43,7 +43,7 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new FBSDKPackage(mCallbackManager),
             new FIRAnalyticsPackage(),
-
+new RNFirebaseDatabasePackage(),
             new VectorIconsPackage(),
             new RNGoogleSigninPackage(),
             new RNGestureHandlerPackage(),

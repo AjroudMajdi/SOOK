@@ -23,6 +23,17 @@ YellowBox.ignoreWarnings([
 ]);
 
 const Application = createStackNavigator({
+  CleanAdd: {
+    screen: CleanAdd,
+    navigationOptions: {
+      title: "Go-Clean",
+
+      headerStyle: {
+        backgroundColor: "#0F6DBF"
+      },
+      headerTintColor: "#fff"
+    }
+  },
   Login: { screen: Login, navigationOptions: { header: null } },
   ListUserProvieder: {
     screen: ListUserProvieder,
@@ -43,17 +54,6 @@ const Application = createStackNavigator({
 
   Account: { screen: Account, navigationOptions: { title: "Profile" } },
   UserProfil: { screen: UserProfil, navigationOptions: { header: null } },
-  CleanAdd: {
-    screen: CleanAdd,
-    navigationOptions: {
-      title: "Go-Clean",
-
-      headerStyle: {
-        backgroundColor: "#0F6DBF"
-      },
-      headerTintColor: "#fff"
-    }
-  },
 
   CleanSubmit: {
     screen: CleanSubmit,

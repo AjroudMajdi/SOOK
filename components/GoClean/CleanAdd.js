@@ -2,18 +2,7 @@ import React, { Component } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import UIStepper from "react-native-ui-stepper";
 import DateTimePicker from "react-native-modal-datetime-picker";
-import { CheckBox } from "react-native-elements";
-import {
-  Container,
-  Content,
-  Header,
-  Form,
-  Input,
-  Item,
-  Button,
-  Label,
-  Picker
-} from "native-base";
+import { Button, Picker } from "native-base";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -34,9 +23,8 @@ export default class CleanAdd extends Component {
         date1: "",
         nbr: "",
         nbr1: "",
-        isDateTimePickerVisible: false,
-        Kitchen: false,
-        Garage: false
+        price: "",
+        isDateTimePickerVisible: false
       }
     };
   }
@@ -49,12 +37,13 @@ export default class CleanAdd extends Component {
     this.state.cleanAdd.date1 = moment(date).format("MMMM Do YYYY, h:mm");
     this._hideDateTimePicker();
   };
+
   render() {
     return (
       <ScrollView style={styles.container} scrollEventThrottle={16}>
         <View style={styles.view1}>
           <View style={{ flex: 1, flexDirection: "row" }}>
-            <Icon name="ios-home" color="#0F6DBF" size={24} />
+            <Icon name="ios-home" color="#0F6DBF" size={30} />
           </View>
 
           <Picker
@@ -81,23 +70,13 @@ export default class CleanAdd extends Component {
           <View style={{ flex: 1, flexDirection: "row" }}>
             <Image
               source={require("../../images/room.png")}
-              style={{
-                height: 24,
-                width: 24,
-                tintColor: "#0F6DBF",
-                marginRight: 15
-              }}
+              style={styles.image}
             />
             <TextInput
               editable={false}
               selectTextOnFocus={false}
               placeholderTextColor="#000"
-              style={{
-                fontSize: 15,
-                paddingRight: 15,
-                paddingTop: -8,
-                paddingLeft: 30
-              }}
+              style={styles.textinput}
               placeholder="Rooms"
             >
               {this.state.cleanAdd.nbr}
@@ -121,23 +100,13 @@ export default class CleanAdd extends Component {
           <View style={{ flex: 1, flexDirection: "row" }}>
             <Image
               source={require("../../images/bath.png")}
-              style={{
-                height: 24,
-                width: 24,
-                tintColor: "#0F6DBF",
-                marginRight: 15
-              }}
+              style={styles.image}
             />
             <TextInput
               placeholderTextColor="#000"
               editable={false}
               selectTextOnFocus={false}
-              style={{
-                fontSize: 15,
-                paddingRight: 15,
-                paddingTop: -8,
-                paddingLeft: 30
-              }}
+              style={styles.textinput}
               placeholder="Bathrooms"
             >
               {this.state.cleanAdd.nbr1}
@@ -163,11 +132,10 @@ export default class CleanAdd extends Component {
             <Icon
               name="ios-clock"
               color="#0F6DBF"
-              size={24}
+              size={30}
               style={{
-                height: 24,
-                width: 24,
-
+                height: 30,
+                width: 30,
                 marginRight: 15
               }}
             />
@@ -175,12 +143,7 @@ export default class CleanAdd extends Component {
               placeholderTextColor="#000"
               editable={false}
               selectTextOnFocus={false}
-              style={{
-                fontSize: 15,
-                paddingRight: 15,
-                paddingTop: -8,
-                paddingLeft: 30
-              }}
+              style={styles.textinput}
               placeholder="Date and Time"
             >
               {this.state.cleanAdd.date1}
@@ -189,12 +152,7 @@ export default class CleanAdd extends Component {
           <TouchableOpacity onPress={this._showDateTimePicker}>
             <Image
               source={require("../../images/calendar.png")}
-              style={{
-                height: 24,
-                width: 24,
-                tintColor: "#0F6DBF",
-                marginRight: 15
-              }}
+              style={styles.image}
             />
           </TouchableOpacity>
 
@@ -206,43 +164,32 @@ export default class CleanAdd extends Component {
             is24Hour={true}
           />
         </View>
-
-        <Text
-          style={{
-            paddingTop: 20,
-
-            paddingLeft: 125,
-            fontSize: 22
-          }}
-        >
-          Extras
-        </Text>
-        <CheckBox
-          center
-          title="Kitchen set cleaning"
-          checked={this.state.cleanAdd.Kitchen}
-          onPress={faculty1 => {
-            const cleanAdd = Object.assign({}, this.state.cleanAdd, {
-              Kitchen: !this.state.cleanAdd.Kitchen
-            });
-            this.setState({ cleanAdd }, () =>
-              console.log("test", this.state.cleanAdd.Kitchen)
-            );
-          }}
-        />
-        <CheckBox
-          center
-          title="Garage set cleaning"
-          checked={this.state.cleanAdd.Garage}
-          onPress={faculty1 => {
-            const cleanAdd = Object.assign({}, this.state.cleanAdd, {
-              Garage: !this.state.cleanAdd.Garage
-            });
-            this.setState({ cleanAdd }, () =>
-              console.log("test1", this.state.cleanAdd.Garage)
-            );
-          }}
-        />
+        <View style={styles.view1}>
+          <View style={{ flex: 1, flexDirection: "row" }}>
+            <Icon
+              name="logo-usd"
+              color="#0F6DBF"
+              size={30}
+              style={{
+                height: 30,
+                width: 30,
+                marginRight: 15
+              }}
+            />
+            <TextInput
+              placeholderTextColor="#000"
+              editable={false}
+              selectTextOnFocus={false}
+              style={styles.textinput}
+              placeholder="Price"
+            >
+              {
+                (this.state.cleanAdd.price =
+                  5 * this.state.cleanAdd.nbr + 5 * this.state.cleanAdd.nbr1)
+              }
+            </TextInput>
+          </View>
+        </View>
         <View style={{ flexDirection: "row" }}>
           <View
             style={{ flexDirection: "row", marginLeft: 20, marginBottom: 10 }}
@@ -320,5 +267,12 @@ const styles = StyleSheet.create({
     width: 80,
     height: 50,
     borderRadius: 30
-  }
+  },
+  textinput: {
+    fontSize: 15,
+    paddingRight: 15,
+    paddingTop: -8,
+    paddingLeft: 30
+  },
+  image: { height: 30, width: 30, tintColor: "#0F6DBF", marginRight: 15 }
 });
